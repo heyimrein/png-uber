@@ -103,7 +103,7 @@ async fn main() {
             main_state.path.as_str(),
             200.,
             50.,
-            12.,
+            15.,
             WHITE
         );
 
