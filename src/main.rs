@@ -34,19 +34,19 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
-    let mut state = MainState::new();
+    let mut main_state = MainState::new();
 
     loop {
         clear_background(BLACK);
 
         // Handle input
         if is_key_pressed(KeyCode::H) {
-            state.show_ui = !state.show_ui;
+            main_state.show_ui = !main_state.show_ui;
         }
 
         // Draw main graphics
         draw_text(
-            state.debug_path.as_str(),
+            main_state.debug_path.as_str(),
             200.,
             50.,
             12.,
@@ -54,7 +54,7 @@ async fn main() {
         );
 
         // Handle and draw UI
-        if state.show_ui {
+        if main_state.show_ui {
             egui_macroquad::ui(|ctx| {
                 egui::Window::new("egui test :>")
                     .fixed_pos(pos2(0., 0.))
@@ -62,7 +62,7 @@ async fn main() {
                     .show(
                         ctx,
                         |ui| {
-                            egui_windows::test_window(ui, &mut state)
+                            egui_windows::test_window(ui, &mut main_state)
                         }
                     );
             });
