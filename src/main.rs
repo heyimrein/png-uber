@@ -24,6 +24,8 @@ impl MainState {
     }
 }
 
+
+// PNG-Tuber avatar
 #[derive(Clone)]
 pub struct Tuber {
     texture: Texture2D,
@@ -57,6 +59,8 @@ impl Tuber {
     }
 }
 
+
+// Init window config
 fn window_conf() -> Conf {
     Conf {
         window_title: "⚡PNG Uber!⚡".to_string(),
@@ -71,6 +75,7 @@ async fn main() {
     let mut main_state = MainState::new();
     let mut tuber = Tuber::new();
 
+    // App loop
     loop {
         main_state.time += main_state.dt_helper
             .elapsed()

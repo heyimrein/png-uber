@@ -1,6 +1,8 @@
 use egui_macroquad::egui;
 use crate::MainState;
 
+
+/// Render the test window used for debugging
 pub fn test_window(ui: &mut egui::Ui, main_state: &mut MainState) {
     if ui.button("Open File").clicked() {
         let wrk_dir_option = std::env::current_dir().unwrap();
