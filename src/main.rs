@@ -51,7 +51,7 @@ impl Tuber {
     pub fn set_texture(&mut self, texture: &Texture2D) {
         let res = vec2(texture.width(), texture.height());
         let ratio = res.x / res.y;
-        let height = (200. * self.scale);
+        let height = 200. * self.scale;
         let width = height * ratio;
 
         self.params.dest_size = Some(vec2(width, height));
