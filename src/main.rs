@@ -71,6 +71,7 @@ fn window_conf() -> Conf {
 }
 
 
+/// App entry-point
 #[macroquad::main(window_conf)]
 async fn main() {
     let mut main_state = MainState::new();
