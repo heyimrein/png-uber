@@ -18,7 +18,7 @@ pub fn test_window(ui: &mut egui::Ui, state: &mut MainState) {
             Some(path) => { path }
         };
 
-        state.path = path;
+        state.debug_path = path;
     }
 }
 
