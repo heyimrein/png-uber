@@ -1,4 +1,4 @@
-# ⚡PNG UBER⚡
+# ⚡PNG-Uber!⚡
 ### PNG-tuber avatar software with ~juice!🧃
 
 ## Usage

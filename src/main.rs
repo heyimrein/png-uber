@@ -25,7 +25,7 @@ pub struct Tuber {
 
 fn window_conf() -> Conf {
     Conf {
-        window_title: "PNG uber".to_string(),
+        window_title: "⚡PNG Uber!⚡".to_string(),
         window_resizable: true,
         ..Default::default()
     }
