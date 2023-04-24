@@ -26,7 +26,7 @@ impl MainState {
 }
 
 
-/// PNG-Tuber avatar
+/// PNG-Tuber avatar object
 #[derive(Clone)]
 pub struct Tuber {
     texture: Texture2D,
