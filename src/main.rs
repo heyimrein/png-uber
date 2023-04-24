@@ -1,5 +1,6 @@
 mod egui_windows;
 
+use std::time::SystemTime;
 use egui_macroquad::egui;
 use egui_macroquad::egui::{pos2};
 use macroquad::prelude::*;
@@ -7,20 +8,38 @@ use macroquad::prelude::*;
 
 pub struct MainState {
     show_ui: bool,
-    debug_path: String,
+    path: String,
+    time: f32,
+    dt_helper: SystemTime
 }
 
 impl MainState {
     pub fn new() -> MainState {
         MainState {
             show_ui: true,
-            debug_path: "".to_string()
+            path: "".to_string(),
+            time: 0.,
+            dt_helper: SystemTime::now()
         }
     }
 }
 
+#[derive(Clone)]
 pub struct Tuber {
+    texture: Texture2D,
+    params: DrawTextureParams
+}
 
+impl Tuber {
+    pub fn new() -> Tuber {
+        Tuber {
+            texture: Texture2D::empty(),
+            params: DrawTextureParams {
+                dest_size: Some(vec2(200., 200.)),
+                ..DrawTextureParams::default()
+            }
+        }
+    }
 }
 
 fn window_conf() -> Conf {
@@ -35,8 +54,14 @@ fn window_conf() -> Conf {
 #[macroquad::main(window_conf)]
 async fn main() {
     let mut main_state = MainState::new();
+    let mut tuber = Tuber::new();
 
     loop {
+        main_state.time += main_state.dt_helper
+            .elapsed()
+            .unwrap()
+            .as_secs_f32();
+
         clear_background(BLACK);
 
         // Handle input
@@ -45,8 +70,16 @@ async fn main() {
         }
 
         // Draw main graphics
+        let tuber_temp = tuber.clone();
+        draw_texture_ex(
+            tuber_temp.texture,
+            window_conf().window_width as f32 / 2. - 100.,
+            window_conf().window_height as f32 / 2. - 100. + ((&main_state.time * 10.).sin() * 25.),
+            WHITE,
+            tuber_temp.params
+        );
         draw_text(
-            main_state.debug_path.as_str(),
+            main_state.path.as_str(),
             200.,
             50.,
             12.,
@@ -54,6 +87,7 @@ async fn main() {
         );
 
         // Handle and draw UI
+        let old_path = main_state.path.to_owned();
         if main_state.show_ui {
             egui_macroquad::ui(|ctx| {
                 egui::Window::new("egui test :>")
@@ -68,7 +102,11 @@ async fn main() {
             });
             egui_macroquad::draw();
         }
+        if main_state.path != old_path {
+            tuber.texture = load_texture(main_state.path.as_str()).await.unwrap();
+        }
 
+        main_state.dt_helper = SystemTime::now();
         next_frame().await;
     }
 }
