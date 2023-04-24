@@ -35,10 +35,16 @@ impl Tuber {
         Tuber {
             texture: Texture2D::empty(),
             params: DrawTextureParams {
-                dest_size: Some(vec2(200., 200.)),
+                dest_size: Some(vec2(0., 0.)),
                 ..DrawTextureParams::default()
             }
         }
+    }
+
+    pub fn set_texture(&mut self, texture: &Texture2D) {
+        let ratio = texture.width() / texture.height();
+        self.params.dest_size = Some(vec2(200. * ratio, 200.));
+        self.texture = texture.clone();
     }
 }
 
@@ -90,7 +96,7 @@ async fn main() {
         let old_path = main_state.path.to_owned();
         if main_state.show_ui {
             egui_macroquad::ui(|ctx| {
-                egui::Window::new("egui test :>")
+                egui::Window::new("Image Settings")
                     .fixed_pos(pos2(0., 0.))
                     .fixed_size(egui::vec2(150., 100.))
                     .show(
@@ -103,7 +109,7 @@ async fn main() {
             egui_macroquad::draw();
         }
         if main_state.path != old_path {
-            tuber.texture = load_texture(main_state.path.as_str()).await.unwrap();
+            tuber.set_texture(&load_texture(main_state.path.as_str()).await.unwrap());
         }
 
         main_state.dt_helper = SystemTime::now();
