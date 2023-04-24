@@ -27,6 +27,8 @@ impl MainState {
 #[derive(Clone)]
 pub struct Tuber {
     texture: Texture2D,
+    scale: f32,
+    offset: Vec2,
     params: DrawTextureParams
 }
 
@@ -34,6 +36,8 @@ impl Tuber {
     pub fn new() -> Tuber {
         Tuber {
             texture: Texture2D::empty(),
+            scale: 1.,
+            offset: vec2(0., 0.),
             params: DrawTextureParams {
                 dest_size: Some(vec2(0., 0.)),
                 ..DrawTextureParams::default()
@@ -42,8 +46,13 @@ impl Tuber {
     }
 
     pub fn set_texture(&mut self, texture: &Texture2D) {
-        let ratio = texture.width() / texture.height();
-        self.params.dest_size = Some(vec2(200. * ratio, 200.));
+        let res = vec2(texture.width(), texture.height());
+        let ratio = res.x / res.y;
+        let height = (200. * self.scale);
+        let width = height * ratio;
+
+        self.params.dest_size = Some(vec2(width, height));
+        self.offset = vec2(width / 2., height / 2.);
         self.texture = texture.clone();
     }
 }
@@ -79,8 +88,9 @@ async fn main() {
         let tuber_temp = tuber.clone();
         draw_texture_ex(
             tuber_temp.texture,
-            window_conf().window_width as f32 / 2. - 100.,
-            window_conf().window_height as f32 / 2. - 100. + ((&main_state.time * 10.).sin() * 25.),
+            (window_conf().window_width as f32 / 2.) - tuber.offset.x,
+            (window_conf().window_height as f32 / 2.) - tuber.offset.y
+                + ((&main_state.time * 10.).sin() * 25.),
             WHITE,
             tuber_temp.params
         );
