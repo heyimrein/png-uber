@@ -6,6 +6,7 @@ use egui_macroquad::egui::{pos2};
 use macroquad::prelude::*;
 
 
+/// Main state object containing app-wide data
 pub struct MainState {
     show_ui: bool,
     path: String,
@@ -25,7 +26,7 @@ impl MainState {
 }
 
 
-// PNG-Tuber avatar
+/// PNG-Tuber avatar
 #[derive(Clone)]
 pub struct Tuber {
     texture: Texture2D,
@@ -60,7 +61,7 @@ impl Tuber {
 }
 
 
-// Init window config
+/// Init window config
 fn window_conf() -> Conf {
     Conf {
         window_title: "⚡PNG Uber!⚡".to_string(),
