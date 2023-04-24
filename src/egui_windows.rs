@@ -12,7 +12,7 @@ pub fn test_window(ui: &mut egui::Ui, main_state: &mut MainState) {
         let path = match tinyfiledialogs::open_file_dialog(
             "Open File",
             wrk_dir,
-            Some((&["*.png", "*.jpg", "*.jpeg"], "Image file (.png, .jpg, .jpeg)")),
+            Some((&["*.png"], "Image file (.png)")),
         ) {
             None => { return; }
             Some(path) => { path }
