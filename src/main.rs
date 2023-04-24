@@ -61,7 +61,9 @@ async fn main() {
                     .fixed_size(egui::vec2(150., 100.))
                     .show(
                         ctx,
-                        |ui| { egui_windows::test_window(ui, &mut state) }
+                        |ui| {
+                            egui_windows::test_window(ui, &mut state)
+                        }
                     );
             });
             egui_macroquad::draw();
