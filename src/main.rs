@@ -1,8 +1,6 @@
 mod egui_windows;
 
 use std::time::SystemTime;
-use egui_macroquad::egui;
-use egui_macroquad::egui::{pos2};
 use macroquad::prelude::*;
 
 
@@ -113,15 +111,7 @@ async fn main() {
         let old_path = main_state.path.to_owned();
         if main_state.show_ui {
             egui_macroquad::ui(|ctx| {
-                egui::Window::new("Image Settings")
-                    .fixed_pos(pos2(0., 0.))
-                    .fixed_size(egui::vec2(150., 100.))
-                    .show(
-                        ctx,
-                        |ui| {
-                            egui_windows::test_window(ui, &mut main_state)
-                        }
-                    );
+                egui_windows::draw_windows(ctx, &mut main_state);
             });
             egui_macroquad::draw();
         }

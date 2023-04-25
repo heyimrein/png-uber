@@ -1,5 +1,20 @@
 use egui_macroquad::egui;
+use egui_macroquad::egui::{Context, pos2};
 use crate::MainState;
+
+
+/// Render/Handle UI windows
+pub fn draw_windows(ctx: &Context, main_state: &mut MainState) {
+    egui::Window::new("Image Settings")
+        .fixed_pos(pos2(0., 0.))
+        .fixed_size(egui::vec2(150., 100.))
+        .show(
+            ctx,
+            |ui| {
+                test_window(ui, main_state);
+            }
+        );
+}
 
 
 /// Render the test window used for debugging
