@@ -12,3 +12,7 @@
 ## Contribution🛠️
 - All pull requests will be considered as long as they don't cause any compilation errors 😁
 - If adding any new dependencies, explain the benefits and acknowledge the downsides👍
+
+## Current Todo: 
+- [ ] Audio processing (already being actively worked on)
+- [ ] Keyboard input detection 
