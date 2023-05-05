@@ -14,5 +14,5 @@
 - If adding any new dependencies, explain the benefits and acknowledge the downsides👍
 
 ## Current Todo: 
-- [ ] Audio processing (already being actively worked on)
+- [ ] Audio processing (attempting to implement myself, feel free to take a shot though👍)
 - [ ] Keyboard input detection 
