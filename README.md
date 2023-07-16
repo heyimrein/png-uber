@@ -15,4 +15,4 @@
 
 ## Current Todo: 
 - [ ] Audio processing (attempting to implement myself, feel free to take a shot though👍)
-- [ ] Keyboard input detection 
+- [ ] Global keyboard input detection 
