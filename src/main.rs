@@ -63,7 +63,7 @@ impl Tuber {
 fn window_conf() -> Conf {
     Conf {
         window_title: "⚡PNG Uber!⚡".to_string(),
-        window_resizable: true,
+        window_resizable: false,
         ..Default::default()
     }
 }
