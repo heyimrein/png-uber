@@ -7,5 +7,5 @@ edition = "2021"
 
 [dependencies]
 egui-macroquad = "0.15.0"
-macroquad = "0.3.25"
+macroquad = { version = "0.3.25", default-features = false }
 tinyfiledialogs = "3.9.1"
